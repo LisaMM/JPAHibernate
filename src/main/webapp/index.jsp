@@ -15,6 +15,7 @@
 		<nav>
 			<ul>
 				<li><a href="<c:url value='/docenten/zoeken.htm'/>">Docent zoeken</a></li>
+				<li><a href="<c:url value='/docenten/toevoegen.htm'/>">Docent toevoegen</a></li>
 			</ul>
 		</nav>
 	</body>
