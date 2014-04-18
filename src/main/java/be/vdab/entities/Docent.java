@@ -1,11 +1,8 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
+import java.math.*;
 import javax.persistence.*;
-
 import be.vdab.enums.Geslacht;
 
 /**
