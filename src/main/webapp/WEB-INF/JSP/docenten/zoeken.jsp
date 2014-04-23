@@ -35,6 +35,10 @@
 				document.getElementById('verwijderknop').disabled = true;
 			};
 		</script>
+		<form action="<c:url value='/docenten/opslag.htm'/>" method='get'>
+			<input type='hidden' name='docentNr' value="${docent.docentNr}">
+			<input type='submit' value='Opslag'>
+		</form>
 	</c:if>
 	<c:import url='/WEB-INF/JSP/fouten.jsp' />
 </body>
