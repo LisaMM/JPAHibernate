@@ -12,4 +12,11 @@ public class DocentDAO {
 	public void create(Docent docent, EntityManager entityManager) {
 		entityManager.persist(docent);
 	}
+	
+	public void delete(long docentNr, EntityManager entityManager) {
+		Docent docent = entityManager.find(Docent.class, docentNr);
+		if (docent != null) {
+			entityManager.remove(docent);
+		}
+	}
 }

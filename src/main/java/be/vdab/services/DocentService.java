@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 public class DocentService {
 	private final DocentDAO docentDAO = new DocentDAO();
-	
+
 	public Docent read(long docentNr) {
 		EntityManager entityManager = JPAFilter.getEntityManager();
 		try {
@@ -16,7 +16,7 @@ public class DocentService {
 			entityManager.close();
 		}
 	}
-	
+
 	public void create(Docent docent) {
 		EntityManager entityManager = JPAFilter.getEntityManager();
 		try {
@@ -25,6 +25,20 @@ public class DocentService {
 			entityManager.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			entityManager.getTransaction().rollback();
+		} finally {
+			entityManager.close();
+		}
+	}
+
+	public void delete(long docentNr) {
+		EntityManager entityManager = JPAFilter.getEntityManager();
+		try {
+			entityManager.getTransaction().begin();
+			docentDAO.delete(docentNr, entityManager);
+			entityManager.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			entityManager.getTransaction().rollback();
+			throw ex;
 		} finally {
 			entityManager.close();
 		}
