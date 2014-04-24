@@ -15,7 +15,8 @@
 		<form action='${opslagURL}' method='post' id='opslagform'>
 			<label>Percentage: <input name='percentage' size='6'
 				value='${param.percentage}' type='number' autofocus>
-			</label> <input type='submit' value='Opslag' id='opslagknop'>
+			</label> 
+			<input type='submit' value='Opslag' id='opslagknop'>
 		</form>
 		<c:import url='/WEB-INF/JSP/fouten.jsp' />
 		<script>
