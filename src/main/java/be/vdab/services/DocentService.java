@@ -33,4 +33,8 @@ public class DocentService {
 		docent.opslag(percentage);
 		docentDAO.commit();
 	}
+	
+	public Iterable<Docent> findByWedde(BigDecimal van, BigDecimal tot) {
+		return docentDAO.findByWeddeBetween(van, tot);
+	}
 }

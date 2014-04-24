@@ -1,6 +1,7 @@
 package be.vdab.dao;
 
-import javax.persistence.EntityManager;
+import java.math.BigDecimal;
+import javax.persistence.*;
 import be.vdab.entities.Docent;
 
 public class DocentDAO extends AbstractDAO {
@@ -21,5 +22,9 @@ public class DocentDAO extends AbstractDAO {
 		}
 	}
 	
-	
+	public Iterable<Docent> findByWeddeBetween(BigDecimal van, BigDecimal tot) {
+		TypedQuery<Docent> query = getEntityManager().createQuery(
+				"select d from Docent d", Docent.class);
+		return query.getResultList();
+	}
 }
