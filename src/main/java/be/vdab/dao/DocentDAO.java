@@ -1,8 +1,11 @@
 package be.vdab.dao;
 
 import java.math.BigDecimal;
+
 import javax.persistence.*;
+
 import be.vdab.entities.Docent;
+import be.vdab.util.VoornaamInfo;
 
 public class DocentDAO extends AbstractDAO {
 
@@ -34,9 +37,10 @@ public class DocentDAO extends AbstractDAO {
 		return query.getResultList();
 	}
 	
-	public Iterable<String> findVoornamen() {
-		TypedQuery<String> query = getEntityManager().createQuery(
-				"select d.voornaam from Docent d", String.class);
+	public Iterable<VoornaamInfo> findVoornamen() {
+		TypedQuery<VoornaamInfo> query = getEntityManager().createQuery(
+				"select new be.vdab.util.VoornaamInfo(d.docentNr, d.voornaam) "
+				+ "from Docent d", VoornaamInfo.class);
 		return query.getResultList();
 	}
 }

@@ -1,9 +1,11 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
+
 import be.vdab.dao.DocentDAO;
 import be.vdab.entities.Docent;
 import be.vdab.exceptions.DocentNietGevondenException;
+import be.vdab.util.VoornaamInfo;
 
 public class DocentService {
 	private final DocentDAO docentDAO = new DocentDAO();
@@ -39,7 +41,7 @@ public class DocentService {
 		return docentDAO.findByWeddeBetween(van, tot, vanafRij, aantalRijen);
 	}
 	
-	public Iterable<String> findVoornamen() {
+	public Iterable<VoornaamInfo> findVoornamen() {
 		return docentDAO.findVoornamen();
 	}
 }
