@@ -43,4 +43,10 @@ public class DocentDAO extends AbstractDAO {
 				+ "from Docent d", VoornaamInfo.class);
 		return query.getResultList();
 	}
+	
+	public BigDecimal findMaxWedde() {
+		TypedQuery<BigDecimal> query = getEntityManager().createQuery(
+				"select max(d.wedde) from Docent d", BigDecimal.class);
+		return query.getSingleResult();
+	}
 }

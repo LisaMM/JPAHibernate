@@ -44,4 +44,8 @@ public class DocentService {
 	public Iterable<VoornaamInfo> findVoornamen() {
 		return docentDAO.findVoornamen();
 	}
+	
+	public BigDecimal findMaxWedde() {
+		return docentDAO.findMaxWedde();
+	}
 }
