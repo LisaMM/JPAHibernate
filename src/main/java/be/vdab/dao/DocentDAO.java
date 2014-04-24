@@ -48,4 +48,11 @@ public class DocentDAO extends AbstractDAO {
 				"select max(d.wedde) from Docent d", BigDecimal.class);
 		return query.getSingleResult();
 	}
+	
+	public int algemeneOpslag(BigDecimal factor, BigDecimal totEnMetWedde) {
+		Query query = getEntityManager().createNamedQuery("Docent.algemeneOpslag");
+		query.setParameter("factor", factor);
+		query.setParameter("totEnMetWedde", totEnMetWedde);
+		return query.executeUpdate();
+	}
 }

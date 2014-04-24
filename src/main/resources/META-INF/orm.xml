@@ -11,4 +11,13 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 			order by d.wedde,d.docentNr
 		</query>
 	</named-query>
+	<named-query name='Docent.algemeneOpslag'>
+		<query>
+			<![CDATA[
+				update Docent d
+				set d.wedde = d.wedde * :factor
+				where d.wedde <= :totEnMetWedde
+			]]>
+		</query>
+	</named-query>
 </entity-mappings>

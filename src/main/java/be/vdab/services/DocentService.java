@@ -48,4 +48,12 @@ public class DocentService {
 	public BigDecimal findMaxWedde() {
 		return docentDAO.findMaxWedde();
 	}
+	
+	public int algemeneOpslag(BigDecimal percentage, BigDecimal totEnMetWedde) {
+		BigDecimal factor = BigDecimal.ONE.add(percentage.divide(new BigDecimal(100)));
+		docentDAO.beginTransaction();
+		int aantalDocentenAangepast = docentDAO.algemeneOpslag(factor, totEnMetWedde);
+		docentDAO.commit();
+		return aantalDocentenAangepast;
+	}
 }

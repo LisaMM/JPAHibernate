@@ -24,6 +24,8 @@
 					Docenten voornamen</a></li>
 				<li><a href="<c:url value='/docenten/maxwedde.htm'/>">
 					Maximum wedde docenten</a></li>
+				<li><a href="<c:url value='/docenten/algemeneopslag.htm'/>">
+					Algemene opslag docenten</a></li>
 			</ul>
 		</nav>
 	</body>
