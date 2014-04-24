@@ -1,16 +1,16 @@
 package be.vdab.util;
 
 public class VoornaamInfo {
-	private final long docentNr;
+	private final long aantal;
 	private final String voornaam;
 
-	public VoornaamInfo(long docentNr, String voornaam) {
-		this.docentNr = docentNr;
+	public VoornaamInfo(String voornaam, long aantal) {
+		this.aantal = aantal;
 		this.voornaam = voornaam;
 	}
 
-	public long getDocentNr() {
-		return docentNr;
+	public long getAantal() {
+		return aantal;
 	}
 
 	public String getVoornaam() {
@@ -19,7 +19,7 @@ public class VoornaamInfo {
 	
 	@Override
 	public String toString() {
-		return String.format("%d:%s", docentNr, voornaam);
+		return String.format("%s:%d", voornaam, aantal);
 	}
 
 }

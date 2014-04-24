@@ -39,8 +39,8 @@ public class DocentDAO extends AbstractDAO {
 	
 	public Iterable<VoornaamInfo> findVoornamen() {
 		TypedQuery<VoornaamInfo> query = getEntityManager().createQuery(
-				"select new be.vdab.util.VoornaamInfo(d.docentNr, d.voornaam) "
-				+ "from Docent d", VoornaamInfo.class);
+				"select new be.vdab.util.VoornaamInfo(d.voornaam, count(d)) "
+				+ "from Docent d group by d.voornaam", VoornaamInfo.class);
 		return query.getResultList();
 	}
 	
