@@ -34,7 +34,8 @@ public class DocentService {
 		docentDAO.commit();
 	}
 	
-	public Iterable<Docent> findByWedde(BigDecimal van, BigDecimal tot) {
-		return docentDAO.findByWeddeBetween(van, tot);
+	public Iterable<Docent> findByWedde(BigDecimal van, BigDecimal tot, 
+			int vanafRij, int aantalRijen) {
+		return docentDAO.findByWeddeBetween(van, tot, vanafRij, aantalRijen);
 	}
 }

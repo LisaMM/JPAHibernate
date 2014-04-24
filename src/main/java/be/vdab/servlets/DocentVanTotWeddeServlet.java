@@ -19,10 +19,8 @@ public class DocentVanTotWeddeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/docenten/vantotwedde.jsp";
 	private final DocentService docentService = new DocentService();
+	private static final int AANTAL_RIJEN = 20;
        
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		if (! request.getParameterMap().isEmpty()) {
@@ -40,11 +38,22 @@ public class DocentVanTotWeddeServlet extends HttpServlet {
 				fouten.add("Tot moet een getal zijn");
 			}
 			if (fouten.isEmpty()) {
-				Iterable<Docent> docenten = docentService.findByWedde(van, tot);
+				int vanafRij = request.getParameter("vanafRij") == null ? 
+						0 : Integer.parseInt(request.getParameter("vanafRij"));
+				request.setAttribute("vanafRij", vanafRij);
+				request.setAttribute("aantalRijen", AANTAL_RIJEN);
+				Iterable<Docent> docenten = 
+						docentService.findByWedde(van, tot, vanafRij, AANTAL_RIJEN + 1);
 				if (! docenten.iterator().hasNext()) {
 					fouten.add("Geen docenten gevonden");
 				} else {
-					request.setAttribute("docenten", docenten);
+					List<Docent> docentenList = (List<Docent>) docenten;
+					if (docentenList.size() <= AANTAL_RIJEN) {
+						request.setAttribute("laatstePagina", true);
+					} else {
+						docentenList.remove(AANTAL_RIJEN);
+					}
+					request.setAttribute("docenten", docentenList);
 				}
 			}
 			if (! fouten.isEmpty()) {

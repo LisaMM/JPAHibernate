@@ -22,12 +22,15 @@ public class DocentDAO extends AbstractDAO {
 		}
 	}
 	
-	public Iterable<Docent> findByWeddeBetween(BigDecimal van, BigDecimal tot) {
+	public Iterable<Docent> findByWeddeBetween(BigDecimal van, BigDecimal tot, 
+			int vanafRij, int aantalRijen) {
 		TypedQuery<Docent> query = getEntityManager().createQuery(
 				"select d from Docent d where d.wedde between :van and :tot "
 				+ "order by d.wedde, d.docentNr", Docent.class);
 		query.setParameter("van", van);
 		query.setParameter("tot", tot);
+		query.setFirstResult(vanafRij);
+		query.setMaxResults(aantalRijen);
 		return query.getResultList();
 	}
 }
