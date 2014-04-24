@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<h1>Docenten van tot wedde</h1>
-		<form action="<c:url value='docenten/vantotwedde.htm'/>" method='get'>
+		<form action="<c:url value='vantotwedde.htm'/>" method='get'>
 			<label>Van:
 				<input name='van' value='${param.van}' type='number' autofocus>
 			</label>
