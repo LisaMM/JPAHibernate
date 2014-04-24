@@ -10,24 +10,36 @@
 	</head>
 	<body>
 		<h1>Docenten van tot wedde</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>Nummer</th>
-					<th>Naam</th>
-					<th>Wedde</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items='${docenten}' var='docent'>
-					<tr class='wedde'>
-						<td>${docent.docentNr}</td>
-						<td>${docent.naam}</td>
-						<td><fmt:formatNumber value='${docent.docentNr}' 
-							minFractionDigits='2' maxFractionDigits='2'/></td>
+		<form action="<c:url value='docenten/vantotwedde.htm'/>" method='get'>
+			<label>Van:
+				<input name='van' value='${param.van}' type='number' autofocus>
+			</label>
+			<label>Tot:
+				<input name='tot' value='${param.tot}' type='number' autofocus>
+			</label>
+			<input type='submit' value='Zoeken'>
+		</form>
+		<c:import url='/WEB-INF/JSP/fouten.jsp' />
+		<c:if test="${not empty docenten}">
+			<table>
+				<thead>
+					<tr>
+						<th>Nummer</th>
+						<th>Naam</th>
+						<th>Wedde</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach items='${docenten}' var='docent'>
+						<tr class='wedde'>
+							<td>${docent.docentNr}</td>
+							<td>${docent.naam}</td>
+							<td><fmt:formatNumber value='${docent.docentNr}' 
+								minFractionDigits='2' maxFractionDigits='2'/></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
 	</body>
 </html>
