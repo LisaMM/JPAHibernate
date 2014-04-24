@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import be.vdab.filters.JPAFilter;
 
-public class AbstractDAO {
+public abstract class AbstractDAO {
 
 	protected EntityManager getEntityManager() {
 		return JPAFilter.getEntityManager();
