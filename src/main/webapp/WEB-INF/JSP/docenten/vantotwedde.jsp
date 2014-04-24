@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items='${docenten}' var='docent'>
-					<tr>
+					<tr class='wedde'>
 						<td>${docent.docentNr}</td>
 						<td>${docent.naam}</td>
 						<td><fmt:formatNumber value='${docent.docentNr}' 
