@@ -33,4 +33,10 @@ public class DocentDAO extends AbstractDAO {
 		query.setMaxResults(aantalRijen);
 		return query.getResultList();
 	}
+	
+	public Iterable<String> findVoornamen() {
+		TypedQuery<String> query = getEntityManager().createQuery(
+				"select d.voornaam from Docent d", String.class);
+		return query.getResultList();
+	}
 }

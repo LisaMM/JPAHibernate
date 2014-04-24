@@ -14,9 +14,14 @@
 		</header>
 		<nav>
 			<ul>
-				<li><a href="<c:url value='/docenten/zoeken.htm'/>">Docent zoeken</a></li>
-				<li><a href="<c:url value='/docenten/toevoegen.htm'/>">Docent toevoegen</a></li>
-				<li><a href="<c:url value='/docenten/vantotwedde.htm'/>">Docenten van tot wedde</a></li>
+				<li><a href="<c:url value='/docenten/zoeken.htm'/>">
+					Docent zoeken</a></li>
+				<li><a href="<c:url value='/docenten/toevoegen.htm'/>">
+					Docent toevoegen</a></li>
+				<li><a href="<c:url value='/docenten/vantotwedde.htm'/>">
+					Docenten van tot wedde</a></li>
+				<li><a href="<c:url value='/docenten/voornamen.htm'/>">
+					Docenten voornamen</a></li>
 			</ul>
 		</nav>
 	</body>

@@ -38,4 +38,8 @@ public class DocentService {
 			int vanafRij, int aantalRijen) {
 		return docentDAO.findByWeddeBetween(van, tot, vanafRij, aantalRijen);
 	}
+	
+	public Iterable<String> findVoornamen() {
+		return docentDAO.findVoornamen();
+	}
 }

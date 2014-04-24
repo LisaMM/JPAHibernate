@@ -9,7 +9,7 @@
 <link rel='stylesheet' href='${contextPath}/styles/default.css'>
 </head>
 <body>
-	<h1>Docent toeovegen</h1>
+	<h1>Docent toevoegen</h1>
 	<form action="<c:url value='/docenten/toevoegen.htm'/>" method='post'
 		id='toevoegform'>
 		<label>Voornaam: 
