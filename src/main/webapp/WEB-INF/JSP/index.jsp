@@ -26,6 +26,8 @@
 					Maximum wedde docenten</a></li>
 				<li><a href="<c:url value='/docenten/algemeneopslag.htm'/>">
 					Algemene opslag docenten</a></li>
+				<li><a href="<c:url value='/cursussen/metnaam.htm'/>">
+					Cursussen met woord in naam</a></li>
 			</ul>
 		</nav>
 	</body>

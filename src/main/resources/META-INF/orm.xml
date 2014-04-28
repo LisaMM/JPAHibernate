@@ -20,4 +20,9 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 			]]>
 		</query>
 	</named-query>
+	<named-query name='Cursus.findByNaamContains'>
+		<query>
+			select c from Cursus c where c.naam like :zoals order by c.naam
+		</query>
+	</named-query>
 </entity-mappings>

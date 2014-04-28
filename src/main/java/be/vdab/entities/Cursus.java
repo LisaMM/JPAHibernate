@@ -8,8 +8,9 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="cursussen")
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "cursussen")
+@DiscriminatorColumn(name = "Soort")
 public class Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	   

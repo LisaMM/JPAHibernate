@@ -10,8 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="KlassikaleCursussen")
-
+@DiscriminatorValue("K")
 public class KlassikaleCursus extends Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

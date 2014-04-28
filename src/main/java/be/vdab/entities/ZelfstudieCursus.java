@@ -9,8 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="ZelfstudieCursussen")
-
+@DiscriminatorValue("Z")
 public class ZelfstudieCursus extends Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
