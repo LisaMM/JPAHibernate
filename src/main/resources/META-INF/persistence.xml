@@ -6,6 +6,9 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd'>
 	<persistence-unit name='vdab1'>
 		<non-jta-data-source>java:/comp/env/jdbc/vdab1</non-jta-data-source>
 		<class>be.vdab.entities.Docent</class>
+		<class>be.vdab.entities.Cursus</class>
+		<class>be.vdab.entities.KlassikaleCursus</class>
+		<class>be.vdab.entities.ZelfstudieCursus</class>
 		<properties>
 			<property name='hibernate.show_sql' value='true' />
 			<property name='hibernate.format_sql' value='true' />
