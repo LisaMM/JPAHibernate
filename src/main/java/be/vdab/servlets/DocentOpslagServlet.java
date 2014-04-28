@@ -17,7 +17,6 @@ import be.vdab.services.DocentService;
 @WebServlet("/docent/opslag.htm")
 public class DocentOpslagServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private static final String VIEW = "/WEB-INF/JSP/docenten/opslag.jsp";
 	private final DocentService docentService = new DocentService();
 

@@ -20,7 +20,8 @@ public class DocentZoekenServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		if (! request.getParameterMap().isEmpty()) {
 			List<String> fouten = new ArrayList<>();
 			try {

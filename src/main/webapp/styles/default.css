@@ -60,4 +60,11 @@ input[type='checkbox'],input[type='radio'] {
 	margin-right: 0.2em;
 }
 
+.wedde td:first-child {
+	text-align:right;
+}
+
+.wedde td:last-child {
+	text-align:right;
+}
 
