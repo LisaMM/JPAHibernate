@@ -31,6 +31,20 @@
 				</c:forEach>
 			</ul>
 		</c:if>
+		<c:url value='/docenten/zoeken.htm' var='toevoegURL'>
+			<c:param name='docentNr' value='${docent.docentNr}' />
+		</c:url>
+		<form method='post' action='${toevoegURL}' id='toevoegform'>
+			<label>Bijnaam: 
+				<input name='bijnaam' value='${param.bijnaam}'>
+			</label> 
+			<input type='submit' value='Toevoegen' id='toevoegknop'>
+		</form>
+		<script>
+			document.getElementById('toevoegform').onsubmit = function() {
+				document.getElementById('toevoegknop').disabled = true;
+			};
+		</script>
 		<c:url value='/docenten/verwijderen.htm' var='verwijderURL'>
 			<c:param name='docentNr' value='${docent.docentNr}' />
 		</c:url>

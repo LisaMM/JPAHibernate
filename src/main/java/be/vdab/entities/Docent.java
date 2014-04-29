@@ -92,5 +92,8 @@ public class Docent implements Serializable {
 	public Set<String> getBijnamen() {
 		return Collections.unmodifiableSet(bijnamen);
 	}
-   
+	
+	public void addBijnaam(String bijnaam) {
+		bijnamen.add(bijnaam);
+	}
 }
