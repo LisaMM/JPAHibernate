@@ -19,7 +19,7 @@
 		<c:if test="${not empty campussen}">
 			<ul>
 				<c:forEach items='${campussen}' var='campus'>
-					<li>${campus.naam}(${campus.adres.straat} 
+					<li>${campus.naam} (${campus.adres.straat} 
 						${campus.adres.huisNr})</li>
 				</c:forEach>
 			</ul>

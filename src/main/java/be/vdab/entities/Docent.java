@@ -2,7 +2,10 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.*;
+import java.util.*;
+
 import javax.persistence.*;
+
 import be.vdab.enums.Geslacht;
 
 /**
@@ -23,6 +26,10 @@ public class Docent implements Serializable {
 	private String familienaam;
 	private BigDecimal wedde;
 	private Geslacht geslacht;
+	@ElementCollection
+	@CollectionTable(name = "docentenbijnamen", joinColumns = @JoinColumn(name = "docentNr"))
+	@Column(name = "Bijnaam")
+	private Set<String> bijnamen;
 
 	protected Docent() {}
 	
@@ -31,6 +38,7 @@ public class Docent implements Serializable {
 		setFamilienaam(familienaam);
 		setWedde(wedde);
 		setGeslacht(geslacht);
+		bijnamen = new HashSet<>();
 	}   
 	
 	public void opslag(BigDecimal percentage) {
@@ -79,6 +87,10 @@ public class Docent implements Serializable {
 
 	public void setGeslacht(Geslacht geslacht) {
 		this.geslacht = geslacht;
+	}
+	
+	public Set<String> getBijnamen() {
+		return Collections.unmodifiableSet(bijnamen);
 	}
    
 }

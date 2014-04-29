@@ -23,6 +23,14 @@
 			<img src='${contextPath}/images/${docent.geslacht}.png'
 				alt='${docent.geslacht}' title='${docent.geslacht}'>
 		</div>
+		<c:if test='${not empty docent.bijnamen}'>
+			<h2>Bijnamen</h2>
+			<ul>
+				<c:forEach items='${docent.bijnamen}' var='bijnaam'>
+					<li>${bijnaam}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<c:url value='/docenten/verwijderen.htm' var='verwijderURL'>
 			<c:param name='docentNr' value='${docent.docentNr}' />
 		</c:url>
