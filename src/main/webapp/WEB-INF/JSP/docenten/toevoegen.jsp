@@ -12,14 +12,12 @@
 	<h1>Docent toevoegen</h1>
 	<form action="<c:url value='/docenten/toevoegen.htm'/>" method='post'
 		id='toevoegform'>
-		<label>Voornaam: 
-			<input name='voornaam' value='${param.voornaam}' autofocus>
-		</label> 
-		<label>Familienaam:
-			<input name='familienaam' value='${param.familienaam}'>
-		</label>
-		<label>Wedde: 
-			<input name='wedde' value='${param.wedde}' type='number'>
+		<label>Voornaam: <input name='voornaam'
+			value='${param.voornaam}' autofocus>
+		</label> <label>Familienaam: <input name='familienaam'
+			value='${param.familienaam}'>
+		</label> <label>Wedde: <input name='wedde' value='${param.wedde}'
+			type='number'>
 		</label>
 		<div>
 			<label> <input type='radio' name='geslacht' value='MAN'
@@ -31,12 +29,19 @@
 				${param.geslacht=='VROUW' ? 'checked' : ''}>Vrouw
 			</label>
 		</div>
-		<input type='submit' value='Toevoegen' id='toevoegknop'>
+		<label>Campus: <select name='campussen' size='6'>
+				<c:forEach items='${campussen}' var='campus'>
+					<option value='${campus.campusNr}'
+						${campus.campusNr == param.campussen ? 'selected' : ''}>
+						${campus.naam} (${campus.adres.gemeente})</option>
+				</c:forEach>
+		</select>
+		</label> <input type='submit' value='Toevoegen' id='toevoegknop'>
 	</form>
 	<c:import url='/WEB-INF/JSP/fouten.jsp' />
 	<script>
-		document.getElementById('toevoegform').onsubmit= function() {
-			document.getElementById('toevoegknop').disabled=true;
+		document.getElementById('toevoegform').onsubmit = function() {
+			document.getElementById('toevoegknop').disabled = true;
 		};
 	</script>
 </body>

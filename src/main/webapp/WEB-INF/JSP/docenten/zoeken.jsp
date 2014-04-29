@@ -22,6 +22,7 @@
 			<fmt:formatNumber value='${docent.wedde}' />
 			<img src='${contextPath}/images/${docent.geslacht}.png'
 				alt='${docent.geslacht}' title='${docent.geslacht}'>
+				campus: ${docent.campus.naam}
 		</div>
 		<c:if test='${not empty docent.bijnamen}'>
 			<h2>Bijnamen</h2>

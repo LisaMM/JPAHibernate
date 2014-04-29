@@ -34,4 +34,9 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 			order by c.naam
 		</query>
 	</named-query>
+	<named-query name='Campus.findAll'>
+		<query>
+			select c from Campus c order by c.naam
+		</query>
+	</named-query>
 </entity-mappings>
