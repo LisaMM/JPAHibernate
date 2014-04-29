@@ -21,6 +21,13 @@
 				<c:forEach items='${campussen}' var='campus'>
 					<li>${campus.naam} (${campus.adres.straat} 
 						${campus.adres.huisNr})</li>
+					<ul>
+						<c:forEach items="${campus.telefoonNrs}" var="telefoonNr">
+							<li>${telefoonNr.fax ? "Fax" : "Telefoon"}
+								<strong>${telefoonNr.nummer}</strong> 
+								${telefoonNr.opmerking}</li>
+						</c:forEach>
+					</ul>
 				</c:forEach>
 			</ul>
 		</c:if>
