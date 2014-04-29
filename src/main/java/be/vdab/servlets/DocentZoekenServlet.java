@@ -52,6 +52,37 @@ public class DocentZoekenServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("verwijderen") == null) {
+			bijnamenToevoegen(request, response);
+		} else {
+			bijnamenVerwijderen(request, response);
+		}
+	}
+
+	private void bijnamenVerwijderen(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		List<String> fouten = new ArrayList<>();
+		long docentNr = Long.parseLong(request.getParameter("docentNr"));
+		String[] bijnamen = request.getParameterValues("bijnaam");
+		if (bijnamen != null) {
+			try {
+				docentService.bijnamenVerwijderen(docentNr, bijnamen);
+			} catch (DocentNietGevondenException ex) {
+				fouten.add("Docent niet gevonden");
+			}
+		}
+		if (fouten.isEmpty()) {
+			response.sendRedirect(response.encodeRedirectURL(String.format(
+					REDIRECT_URL, request.getContextPath(), docentNr)));
+		} else {
+			request.setAttribute("docent", docentService.read(docentNr));
+			request.setAttribute("fouten", fouten);
+			request.getRequestDispatcher(VIEW).forward(request, response);
+		}
+	}
+
+	private void bijnamenToevoegen(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
 		List<String> fouten = new ArrayList<>();
 		long docentNr = Long.parseLong(request.getParameter("docentNr"));
 		String bijnaam = request.getParameter("bijnaam");

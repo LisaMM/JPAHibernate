@@ -25,11 +25,19 @@
 		</div>
 		<c:if test='${not empty docent.bijnamen}'>
 			<h2>Bijnamen</h2>
-			<ul>
-				<c:forEach items='${docent.bijnamen}' var='bijnaam'>
-					<li>${bijnaam}</li>
-				</c:forEach>
-			</ul>
+			<c:url value='/docenten/zoeken.htm' var='verwijderURL'>
+				<c:param name='docentNr' value='${docent.docentNr}'/>
+			</c:url>
+			<form method='post' action='${verwijderURL}'>
+				<ul>
+					<c:forEach items='${docent.bijnamen}' var='bijnaam'>
+						<li><label>${bijnaam}
+							<input type='checkbox' name='bijnaam' value='${bijnaam}'>
+						</label></li>
+					</c:forEach>
+				</ul>
+				<input type='submit' value='Bijnamen verwijderen' name='verwijderen'>
+			</form>
 		</c:if>
 		<c:url value='/docenten/zoeken.htm' var='toevoegURL'>
 			<c:param name='docentNr' value='${docent.docentNr}' />
