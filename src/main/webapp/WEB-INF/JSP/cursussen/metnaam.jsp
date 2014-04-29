@@ -17,7 +17,7 @@
 	<c:if test='${not empty cursussen}'>
 		<ul>
 			<c:forEach items='${cursussen}' var='cursus'>
-				<c:set var='soortCursus' value="${cursus['class'].simpleName}" /> (1)
+				<c:set var='soortCursus' value="${cursus['class'].simpleName}" />
 				<%--Plaats KlassikaleCursus.png en ZelfstudieCursus.png
 				in de folder images van de website--%>
 				<li>${cursus.naam}<img
