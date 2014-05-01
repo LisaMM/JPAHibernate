@@ -11,6 +11,12 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 			order by d.wedde,d.docentNr
 		</query>
 	</named-query>
+	<named-query name='Docent.findByEmailAdres'>
+		<query>
+			select d from Docent d 
+			where d.emailAdres = :emailAdres
+		</query>
+	</named-query>
 	<named-query name='Docent.algemeneOpslag'>
 		<query>
 			<![CDATA[

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import be.vdab.dao.DocentDAO;
 import be.vdab.entities.Docent;
-import be.vdab.exceptions.DocentNietGevondenException;
+import be.vdab.exceptions.*;
 import be.vdab.util.VoornaamInfo;
 
 public class DocentService {
@@ -15,6 +15,9 @@ public class DocentService {
 	}
 
 	public void create(Docent docent) {
+		if (docentDAO.findByEmailAdres(docent.getEmailAdres()) != null) {
+			throw new EmailAdresAlInGebruikException();
+		}
 		docentDAO.beginTransaction();
 		docentDAO.create(docent);
 		docentDAO.commit();

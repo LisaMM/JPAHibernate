@@ -24,8 +24,7 @@ public class Campus implements Serializable {
 	@CollectionTable(name = "campussentelefoonnrs", joinColumns = @JoinColumn(name = "campusNr"))
 	@OrderBy("fax")
 	private Set<TelefoonNr> telefoonNrs;
-	@OneToMany
-	@JoinColumn(name = "CampusNr")
+	@OneToMany (mappedBy = "campus")
 	@OrderBy("voornaam, familienaam")
 	private Set<Docent> docenten;
 
@@ -36,8 +35,7 @@ public class Campus implements Serializable {
 		docenten = new LinkedHashSet<>();
 	}
 
-	protected Campus() {
-	}
+	protected Campus() {}
 
 	public Set<TelefoonNr> getTelefoonNrs() {
 		return Collections.unmodifiableSet(telefoonNrs);
@@ -77,10 +75,16 @@ public class Campus implements Serializable {
 
 	public void addDocent(Docent docent) {
 		docenten.add(docent);
+		if (docent.getCampus() != this) {
+			docent.setCampus(this);
+		}
 	}
 
 	public void removeDocent(Docent docent) {
 		docenten.remove(docent);
+		if (docent.getCampus() == this) {
+			docent.setCampus(null);
+		}
 	}
 
 }

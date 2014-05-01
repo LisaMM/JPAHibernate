@@ -29,14 +29,19 @@
 				${param.geslacht=='VROUW' ? 'checked' : ''}>Vrouw
 			</label>
 		</div>
-		<label>Campus: <select name='campussen' size='6'>
+		<label>Campus: 
+			<select name='campussen' size='6'>
 				<c:forEach items='${campussen}' var='campus'>
 					<option value='${campus.campusNr}'
 						${campus.campusNr == param.campussen ? 'selected' : ''}>
 						${campus.naam} (${campus.adres.gemeente})</option>
 				</c:forEach>
-		</select>
-		</label> <input type='submit' value='Toevoegen' id='toevoegknop'>
+			</select>
+		</label>
+		<label>E-mail adres:
+			<input name="emailAdres" value="${param.emailAdres}" type="email">
+		</label>
+		<input type='submit' value='Toevoegen' id='toevoegknop'>
 	</form>
 	<c:import url='/WEB-INF/JSP/fouten.jsp' />
 	<script>
