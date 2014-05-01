@@ -22,7 +22,38 @@
 			<fmt:formatNumber value='${docent.wedde}' />
 			<img src='${contextPath}/images/${docent.geslacht}.png'
 				alt='${docent.geslacht}' title='${docent.geslacht}'>
+				campus: ${docent.campus.naam}
 		</div>
+		<c:if test='${not empty docent.bijnamen}'>
+			<h2>Bijnamen</h2>
+			<c:url value='/docenten/zoeken.htm' var='verwijderURL'>
+				<c:param name='docentNr' value='${docent.docentNr}'/>
+			</c:url>
+			<form method='post' action='${verwijderURL}'>
+				<ul>
+					<c:forEach items='${docent.bijnamen}' var='bijnaam'>
+						<li><label>${bijnaam}
+							<input type='checkbox' name='bijnaam' value='${bijnaam}'>
+						</label></li>
+					</c:forEach>
+				</ul>
+				<input type='submit' value='Bijnamen verwijderen' name='verwijderen'>
+			</form>
+		</c:if>
+		<c:url value='/docenten/zoeken.htm' var='toevoegURL'>
+			<c:param name='docentNr' value='${docent.docentNr}' />
+		</c:url>
+		<form method='post' action='${toevoegURL}' id='toevoegform'>
+			<label>Bijnaam: 
+				<input name='bijnaam' value='${param.bijnaam}'>
+			</label> 
+			<input type='submit' value='Toevoegen' id='toevoegknop'>
+		</form>
+		<script>
+			document.getElementById('toevoegform').onsubmit = function() {
+				document.getElementById('toevoegknop').disabled = true;
+			};
+		</script>
 		<c:url value='/docenten/verwijderen.htm' var='verwijderURL'>
 			<c:param name='docentNr' value='${docent.docentNr}' />
 		</c:url>

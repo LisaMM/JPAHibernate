@@ -3,31 +3,37 @@ package be.vdab.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 /**
- * Entity implementation class for Entity: Cursus
- *
+ * The persistent class for the cursussen database table.
+ * 
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "cursussen")
-@DiscriminatorColumn(name = "Soort")
-public class Cursus implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
-	   
+
+	@TableGenerator(name = "CursusGenerator",
+	table = "hoogstevolgnrs",
+	pkColumnName = "Naam",
+	valueColumnName = "HoogsteVolgNr",
+	pkColumnValue = "CursussenNr ")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "CursusGenerator")
 	@Id
 	private long cursusNr;
 	private String naam;
 
-	protected Cursus() {}   
-	
+	protected Cursus() {
+	}
+
 	public long getCursusNr() {
 		return this.cursusNr;
 	}
 
 	public void setCursusNr(long cursusNr) {
 		this.cursusNr = cursusNr;
-	}   
-	
+	}
+
 	public String getNaam() {
 		return this.naam;
 	}
@@ -41,3 +47,4 @@ public class Cursus implements Serializable {
 		return String.format("%d:%s", cursusNr, naam);
 	}
 }
+

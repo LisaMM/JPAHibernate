@@ -1,21 +1,23 @@
 package be.vdab.entities;
 
-import be.vdab.entities.Cursus;
 import java.io.Serializable;
+
 import javax.persistence.*;
 
+
 /**
- * Entity implementation class for Entity: ZelfstudieCursus
- *
+ * The persistent class for the zelfstudiecursussen database table.
+ * 
  */
 @Entity
-@DiscriminatorValue("Z")
+@Table(name="Zelfstudiecursussen")
+
 public class ZelfstudieCursus extends Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private int duurtijd;
 
-	protected ZelfstudieCursus() {}   
+	protected ZelfstudieCursus() {
+	}
 	
 	public int getDuurtijd() {
 		return this.duurtijd;
@@ -24,5 +26,4 @@ public class ZelfstudieCursus extends Cursus implements Serializable {
 	public void setDuurtijd(int duurtijd) {
 		this.duurtijd = duurtijd;
 	}
-   
 }

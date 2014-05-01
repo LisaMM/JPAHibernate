@@ -1,34 +1,29 @@
 package be.vdab.entities;
 
-import be.vdab.entities.Cursus;
 import java.io.Serializable;
-import java.util.Date;
+
 import javax.persistence.*;
 
+import java.util.Date;
+
+
 /**
- * Entity implementation class for Entity: KlassikaleCursus
- *
+ * The persistent class for the klassikalecursussen database table.
+ * 
  */
 @Entity
-@DiscriminatorValue("K")
+@Table(name="Klassikalecursussen")
+
 public class KlassikaleCursus extends Cursus implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Temporal(TemporalType.DATE)
-	private Date van;
 	@Temporal(TemporalType.DATE)
 	private Date tot;
+	@Temporal(TemporalType.DATE)
+	private Date van;
 
-	protected KlassikaleCursus() {}   
-	
-	public Date getVan() {
-		return this.van;
+	protected KlassikaleCursus() {
 	}
 
-	public void setVan(Date van) {
-		this.van = van;
-	}   
-	
 	public Date getTot() {
 		return this.tot;
 	}
@@ -36,5 +31,13 @@ public class KlassikaleCursus extends Cursus implements Serializable {
 	public void setTot(Date tot) {
 		this.tot = tot;
 	}
-   
+
+	public Date getVan() {
+		return this.van;
+	}
+
+	public void setVan(Date van) {
+		this.van = van;
+	}
+
 }

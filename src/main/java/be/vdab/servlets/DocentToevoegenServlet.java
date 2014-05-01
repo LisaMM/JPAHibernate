@@ -1,14 +1,16 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.*;
+//import java.math.BigDecimal;
+//import java.util.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import be.vdab.entities.Docent;
-import be.vdab.enums.Geslacht;
-import be.vdab.services.DocentService;
+
+//import be.vdab.entities.*;
+//import be.vdab.enums.Geslacht;
+import be.vdab.services.*;
 
 /**
  * Servlet implementation class DocentToevoegenServlet
@@ -16,10 +18,11 @@ import be.vdab.services.DocentService;
 @WebServlet("/docenten/toevoegen.htm")
 public class DocentToevoegenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	private static final String VIEW = "/WEB-INF/JSP/docenten/toevoegen.jsp";
-	private static final String REDIRECT_URL = "%s/docenten/toegevoegd.htm?docentNr=%d";
-	private final DocentService docentService = new DocentService();
+	//private static final String REDIRECT_URL = "%s/docenten/toegevoegd.htm?docentNr=%d";
+	//private final DocentService docentService = new DocentService();
+	private final CampusService campusService = new CampusService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -27,6 +30,7 @@ public class DocentToevoegenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("campussen", campusService.findAll());
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
@@ -36,7 +40,7 @@ public class DocentToevoegenServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		/*request.setCharacterEncoding("UTF-8");
 		List<String> fouten = new ArrayList<>();
 		String voornaam = request.getParameter("voornaam");
 		if (voornaam == null || voornaam.isEmpty()) {
@@ -59,15 +63,27 @@ public class DocentToevoegenServlet extends HttpServlet {
 		if (geslacht == null) {
 			fouten.add("Geslacht verplicht");
 		}
+		Campus campus = null;
+		String campusNr = request.getParameter("campussen");
+		if (campusNr == null) {
+			fouten.add("Kies een campus");
+		} else {
+			campus = campusService.read(Long.parseLong(campusNr));
+			if (campus == null) {
+				fouten.add("Campus bestaat niet");
+			}
+		}
 		if (fouten.isEmpty()) {
 			Docent docent = new Docent(voornaam, familienaam, wedde, Geslacht.valueOf(geslacht));
+			docent.setcampus(campus);
 			docentService.create(docent);
 			response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, 
 					request.getContextPath(), docent.getDocentNr())));
 		} else {
 			request.setAttribute("fouten", fouten);
+			request.setAttribute("campussen", campusService.findAll());
 			request.getRequestDispatcher(VIEW).forward(request, response);
-		}
+		}*/
 	}
 
 }
