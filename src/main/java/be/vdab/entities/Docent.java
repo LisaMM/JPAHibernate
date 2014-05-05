@@ -36,6 +36,8 @@ public class Docent implements Serializable {
 	private EmailAdres emailAdres;
 	@ManyToMany(mappedBy = "docenten")
 	private Set<Verantwoordelijkheid> verantwoordelijkheden;
+	@Version
+	private long versie;
 
 	protected Docent() {
 	}

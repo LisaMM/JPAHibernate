@@ -3,6 +3,9 @@ package be.vdab.services;
 import java.math.BigDecimal;
 import java.util.Collections;
 
+import javax.persistence.OptimisticLockException;
+import javax.transaction.RollbackException;
+
 import be.vdab.dao.*;
 import be.vdab.entities.*;
 import be.vdab.exceptions.*;
@@ -38,7 +41,13 @@ public class DocentService {
 			throw new DocentNietGevondenException();
 		}
 		docent.opslag(percentage);
-		docentDAO.commit();
+		try {
+			docentDAO.commit();
+		} catch (RollbackException ex) {
+			if (ex.getCause() instanceof OptimisticLockException) {
+				throw new RecordAangepastException();
+			}
+		}
 	}
 
 	public Iterable<Docent> findByWedde(BigDecimal van, BigDecimal tot,

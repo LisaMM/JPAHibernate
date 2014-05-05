@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import be.vdab.exceptions.DocentNietGevondenException;
+import be.vdab.exceptions.*;
 import be.vdab.services.DocentService;
 
 /**
@@ -51,6 +51,8 @@ public class DocentOpslagServlet extends HttpServlet {
 				docentService.opslag(docentNr, percentage);
 			} catch (DocentNietGevondenException ex) {
 				fouten.add("Docent niet gevonden");
+			} catch (RecordAangepastException ex) {
+				fouten.add("Een andere gebruiker heeft deze docent gewijzigd");
 			}
 		}
 		if (fouten.isEmpty()) {

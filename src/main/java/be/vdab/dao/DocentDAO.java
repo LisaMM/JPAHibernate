@@ -78,4 +78,9 @@ public class DocentDAO extends AbstractDAO {
 		query.setParameter("totEnMetWedde", totEnMetWedde);
 		return query.executeUpdate();
 	}
+	
+	public Docent readWithLock(long docentNr) {
+		return getEntityManager().find(Docent.class, docentNr, 
+			LockModeType.PESSIMISTIC_WRITE);
+	}
 }
