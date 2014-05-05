@@ -17,6 +17,12 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 			where d.emailAdres = :emailAdres
 		</query>
 	</named-query>
+	<named-query name='Docent.FindByFamilienaamEnCampus'>
+		<query>
+			select d from Docent d 
+			where d.familienaam like :begin and d.campus= :campus
+		</query>
+	</named-query>
 	<named-query name='Docent.algemeneOpslag'>
 		<query>
 			<![CDATA[
