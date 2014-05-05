@@ -48,6 +48,7 @@ public class Docent implements Serializable {
 		setGeslacht(geslacht);
 		bijnamen = new HashSet<>();
 		setEmailAdres(email);
+		verantwoordelijkheden = new LinkedHashSet<>();
 	}
 
 	public void setEmailAdres(EmailAdres email) {
