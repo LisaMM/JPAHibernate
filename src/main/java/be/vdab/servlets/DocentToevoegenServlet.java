@@ -10,7 +10,9 @@ import javax.servlet.http.*;
 
 import be.vdab.entities.*;
 import be.vdab.enums.Geslacht;
+import be.vdab.exceptions.EmailAdresAlInGebruikException;
 import be.vdab.services.*;
+import be.vdab.valueobjects.EmailAdres;
 
 /**
  * Servlet implementation class DocentToevoegenServlet
@@ -18,7 +20,7 @@ import be.vdab.services.*;
 @WebServlet("/docenten/toevoegen.htm")
 public class DocentToevoegenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String VIEW = "/WEB-INF/JSP/docenten/toevoegen.jsp";
 	private static final String REDIRECT_URL = "%s/docenten/toegevoegd.htm?docentNr=%d";
 	private final DocentService docentService = new DocentService();
@@ -40,8 +42,14 @@ public class DocentToevoegenServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		/*request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		List<String> fouten = new ArrayList<>();
+		EmailAdres emailAdres = null;
+		try {
+			emailAdres = new EmailAdres(request.getParameter("emailAdres"));
+		} catch (IllegalArgumentException ex) {
+			fouten.add("E-mailadres verkeerd.");
+		}
 		String voornaam = request.getParameter("voornaam");
 		if (voornaam == null || voornaam.isEmpty()) {
 			fouten.add("Voornaam verplicht");
@@ -74,16 +82,22 @@ public class DocentToevoegenServlet extends HttpServlet {
 			}
 		}
 		if (fouten.isEmpty()) {
-			Docent docent = new Docent(voornaam, familienaam, wedde, Geslacht.valueOf(geslacht));
-			docent.setcampus(campus);
-			docentService.create(docent);
-			response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, 
-					request.getContextPath(), docent.getDocentNr())));
-		} else {
+			Docent docent = new Docent(voornaam, familienaam, wedde,
+					Geslacht.valueOf(geslacht), emailAdres);
+			docent.setCampus(campus);
+			try {
+				docentService.create(docent);
+				response.sendRedirect(response.encodeRedirectURL(String.format(
+						REDIRECT_URL, request.getContextPath(),
+						docent.getDocentNr())));
+			} catch (EmailAdresAlInGebruikException ex) {
+				fouten.add("E-mail adres is al in gebruik");
+			}
+		}
+		if (!fouten.isEmpty()) {
 			request.setAttribute("fouten", fouten);
 			request.setAttribute("campussen", campusService.findAll());
 			request.getRequestDispatcher(VIEW).forward(request, response);
-		}*/
+		}
 	}
-
 }

@@ -29,11 +29,13 @@ public class Docent implements Serializable {
 	@CollectionTable(name = "docentenbijnamen", joinColumns = @JoinColumn(name = "docentNr"))
 	@Column(name = "Bijnaam")
 	private Set<String> bijnamen;
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name="CampusNr")
-	// private Campus campus;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CampusNr")
+	private Campus campus;
 	@Embedded
 	private EmailAdres emailAdres;
+	@ManyToMany(mappedBy = "docenten")
+	private Set<Verantwoordelijkheid> verantwoordelijkheden;
 
 	protected Docent() {
 	}
@@ -99,11 +101,19 @@ public class Docent implements Serializable {
 		this.wedde = wedde;
 	}
 
-	/*
-	 * public Campus getCampus() { return campus; }
-	 * 
-	 * public void setcampus(Campus campus) { this.campus = campus; }
-	 */
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		if (this.campus != null && this.campus.getDocenten().contains(this)) {
+			this.campus.removeDocent(this);
+		}
+		this.campus = campus;
+		if (campus != null && !campus.getDocenten().contains(this)) {
+			campus.addDocent(this);
+		}
+	}
 
 	public Geslacht getGeslacht() {
 		return geslacht;
@@ -123,6 +133,24 @@ public class Docent implements Serializable {
 
 	public void removeBijnaam(String bijnaam) {
 		bijnamen.remove(bijnaam);
+	}
+
+	public void addVerantwoordelijkheid(Verantwoordelijkheid verantwoordelijkheid) {
+		verantwoordelijkheden.add(verantwoordelijkheid);
+		if (!verantwoordelijkheid.getDocenten().contains(this)) {
+			verantwoordelijkheid.addDocent(this);
+		}
+	}
+
+	public void removeVerantwoordelijkheid(Verantwoordelijkheid verantwoordelijkheid) {
+		verantwoordelijkheden.remove(verantwoordelijkheid);
+		if (verantwoordelijkheid.getDocenten().contains(this)) {
+			verantwoordelijkheid.removeDocent(this);
+		}
+	}
+
+	public Set<Verantwoordelijkheid> getVerantwoordelijkheden() {
+		return Collections.unmodifiableSet(verantwoordelijkheden);
 	}
 
 	@Override
