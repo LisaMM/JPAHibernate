@@ -1,14 +1,20 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 
+import be.vdab.dao.CampusDAO;
 import be.vdab.dao.DocentDAO;
+import be.vdab.entities.Campus;
 import be.vdab.entities.Docent;
-import be.vdab.exceptions.*;
+import be.vdab.exceptions.DocentNietGevondenException;
+import be.vdab.exceptions.EmailAdresAlInGebruikException;
+
 import be.vdab.util.VoornaamInfo;
 
 public class DocentService {
 	private final DocentDAO docentDAO = new DocentDAO();
+	private final CampusDAO campusDAO = new CampusDAO();
 
 	public Docent read(long docentNr) {
 		return docentDAO.read(docentNr);
@@ -42,6 +48,15 @@ public class DocentService {
 	public Iterable<Docent> findByWedde(BigDecimal van, BigDecimal tot,
 			int vanafRij, int aantalRijen) {
 		return docentDAO.findByWeddeBetween(van, tot, vanafRij, aantalRijen);
+	}
+
+	public Iterable<Docent> findByFamilienaamEnCampus(String beginFamilienaam,
+			long campusNr) {
+		Campus campus = campusDAO.read(campusNr);
+		if (campus == null) {
+			return Collections.emptyList();
+		}
+		return docentDAO.findByFamilienaamEnCampus(beginFamilienaam, campus);
 	}
 
 	public Iterable<VoornaamInfo> findVoornamen() {

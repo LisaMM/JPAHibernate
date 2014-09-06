@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.*;
 
-import be.vdab.entities.Docent;
+import be.vdab.entities.*;
 import be.vdab.util.VoornaamInfo;
 import be.vdab.valueobjects.EmailAdres;
 
@@ -37,6 +37,15 @@ public class DocentDAO extends AbstractDAO {
 		return query.getResultList();
 	}
 
+	public Iterable<Docent> findByFamilienaamEnCampus(String beginFamilienaam,
+			Campus campus) {
+		TypedQuery<Docent> query = getEntityManager().createNamedQuery(
+				"Docent.FindByFamilienaamEnCampus", Docent.class);
+		query.setParameter("begin", String.format("%s%%", beginFamilienaam));
+		query.setParameter("campus", campus);
+		return query.getResultList();
+	}
+
 	public Iterable<VoornaamInfo> findVoornamen() {
 		TypedQuery<VoornaamInfo> query = getEntityManager().createQuery(
 				"select new be.vdab.util.VoornaamInfo(d.voornaam, count(d)) "
@@ -58,7 +67,7 @@ public class DocentDAO extends AbstractDAO {
 		query.setParameter("totEnMetWedde", totEnMetWedde);
 		return query.executeUpdate();
 	}
-
+	
 	public Docent findByEmailAdres(EmailAdres emailAdres) {
 		TypedQuery<Docent> query = getEntityManager().createNamedQuery(
 				"Docent.findByEmailAdres", Docent.class);
@@ -68,5 +77,10 @@ public class DocentDAO extends AbstractDAO {
 		} catch (NoResultException ex) {
 			return null;
 		}
+	}
+	
+	public Docent readWithLock(long docentNr) {
+		return getEntityManager().find(Docent.class, docentNr, 
+			LockModeType.PESSIMISTIC_WRITE);
 	}
 }

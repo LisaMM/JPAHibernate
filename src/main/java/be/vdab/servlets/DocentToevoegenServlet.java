@@ -6,15 +6,18 @@ import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import be.vdab.entities.*;
-import be.vdab.services.*;
-import be.vdab.valueobjects.EmailAdres;
+import be.vdab.entities.Campus;
+import be.vdab.entities.Docent;
 import be.vdab.enums.Geslacht;
 import be.vdab.exceptions.EmailAdresAlInGebruikException;
+import be.vdab.services.CampusService;
+import be.vdab.services.DocentService;
+import be.vdab.valueobjects.EmailAdres;
 
-;
 
 /**
  * Servlet implementation class DocentToevoegenServlet

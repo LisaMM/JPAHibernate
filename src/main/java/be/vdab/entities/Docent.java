@@ -34,6 +34,10 @@ public class Docent implements Serializable {
 	private Campus campus;
 	@Embedded
 	private EmailAdres emailAdres;
+	@ManyToMany(mappedBy = "docenten")
+	private Set<Verantwoordelijkheid> verantwoordelijkheden;
+	@Version
+	private long versie;
 
 	protected Docent() {
 	}
@@ -46,6 +50,7 @@ public class Docent implements Serializable {
 		setGeslacht(geslacht);
 		bijnamen = new HashSet<>();
 		setEmailAdres(email);
+		verantwoordelijkheden = new LinkedHashSet<>();
 	}
 
 	public void setEmailAdres(EmailAdres email) {
@@ -98,21 +103,21 @@ public class Docent implements Serializable {
 	public void setWedde(BigDecimal wedde) {
 		this.wedde = wedde;
 	}
-
-	public Campus getCampus() { 
-		return campus; 
-	}
 	
+	public Campus getCampus() {
+		return campus;
+	}
+
 	public void setCampus(Campus campus) {
 		if (this.campus != null && this.campus.getDocenten().contains(this)) {
 			this.campus.removeDocent(this);
 		}
 		this.campus = campus;
-		if (campus != null && campus.getDocenten().contains(this)) {
+		if (campus != null && !campus.getDocenten().contains(this)) {
 			campus.addDocent(this);
 		}
 	}
-	 
+
 	public Geslacht getGeslacht() {
 		return geslacht;
 	}
@@ -131,6 +136,24 @@ public class Docent implements Serializable {
 
 	public void removeBijnaam(String bijnaam) {
 		bijnamen.remove(bijnaam);
+	}
+
+	public void addVerantwoordelijkheid(Verantwoordelijkheid verantwoordelijkheid) {
+		verantwoordelijkheden.add(verantwoordelijkheid);
+		if (!verantwoordelijkheid.getDocenten().contains(this)) {
+			verantwoordelijkheid.addDocent(this);
+		}
+	}
+
+	public void removeVerantwoordelijkheid(Verantwoordelijkheid verantwoordelijkheid) {
+		verantwoordelijkheden.remove(verantwoordelijkheid);
+		if (verantwoordelijkheid.getDocenten().contains(this)) {
+			verantwoordelijkheid.removeDocent(this);
+		}
+	}
+
+	public Set<Verantwoordelijkheid> getVerantwoordelijkheden() {
+		return Collections.unmodifiableSet(verantwoordelijkheden);
 	}
 
 	@Override

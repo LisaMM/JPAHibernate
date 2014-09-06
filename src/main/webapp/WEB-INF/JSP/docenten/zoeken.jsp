@@ -26,6 +26,15 @@
 		</div>
 		<c:if test='${not empty docent.bijnamen}'>
 			<h2>Bijnamen</h2>
+			<c:if test='${not empty docent.verantwoordelijkheden}'>
+				<h2>Verantwoordelijkheden</h2>
+				<ul>
+					<c:forEach items='${docent.verantwoordelijkheden}'
+						var='verantwoordelijkheid'>
+						<li>${verantwoordelijkheid.naam}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
 			<c:url value='/docenten/zoeken.htm' var='verwijderURL'>
 				<c:param name='docentNr' value='${docent.docentNr}'/>
 			</c:url>

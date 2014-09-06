@@ -32,6 +32,10 @@
 					Campussen in een gemeente</a></li>
 				<li><a href="<c:url value='/campussen/docenten.htm'/>">
 					Docent per campus</a></li>
+				<li><a href="<c:url value='/campussen/managertoekennen.htm'/>">
+					Campusmanager toekennen</a></li>
+				<li><a href="<c:url value='/docenten/familienaamcampus.htm'/>">
+					Docenten zoeken op familienaam en campus</a></li>
 			</ul>
 		</nav>
 	</body>

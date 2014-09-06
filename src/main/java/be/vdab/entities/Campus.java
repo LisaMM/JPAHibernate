@@ -27,6 +27,9 @@ public class Campus implements Serializable {
 	@OneToMany (mappedBy = "campus")
 	@OrderBy("voornaam, familienaam")
 	private Set<Docent> docenten;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ManagerNr")
+	private Manager manager;
 
 	public Campus(String naam, Adres adres) {
 		setNaam(naam);
@@ -71,6 +74,23 @@ public class Campus implements Serializable {
 
 	public Set<Docent> getDocenten() {
 		return Collections.unmodifiableSet(docenten);
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		if (manager != this.manager) {
+			Manager vorigeManager = this.manager;
+			this.manager = manager;
+			if (vorigeManager != null && vorigeManager.getCampus() == this) {
+				vorigeManager.setCampus(null);
+			}
+			if (manager != null && manager.getCampus() != this) {
+				this.manager.setCampus(this);
+			}
+		}
 	}
 
 	public void addDocent(Docent docent) {
